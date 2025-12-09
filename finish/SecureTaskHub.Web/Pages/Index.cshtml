@@ -1,0 +1,73 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-4">Welcome to SecureTaskHub</h1>
+    <p class="lead">A teaching demo for secure authentication and authorization in ASP.NET Core</p>
+    
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div class="mt-4">
+            <p>Welcome back, <strong>@User.Identity.Name</strong>!</p>
+            <a asp-page="/MyTasks" class="btn btn-primary btn-lg">View My Tasks</a>
+            
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-page="/AdminDashboard" class="btn btn-warning btn-lg ms-2">Admin Dashboard</a>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="mt-4">
+            <p>Please log in to access your tasks.</p>
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary btn-lg">Log In</a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-primary btn-lg ms-2">Register</a>
+        </div>
+    }
+    
+    <div class="mt-5">
+        <h3>Demo Accounts</h3>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <strong>Admin User</strong>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Email:</strong> admin@demo.local</p>
+                        <p><strong>Password:</strong> P@ssword1</p>
+                        <p class="text-muted small">Can view all tasks from all users</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <strong>Alice (User)</strong>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Email:</strong> alice@demo.local</p>
+                        <p><strong>Password:</strong> P@ssword1</p>
+                        <p class="text-muted small">Can only view own tasks</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <strong>Bob (User)</strong>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Email:</strong> bob@demo.local</p>
+                        <p><strong>Password:</strong> P@ssword1</p>
+                        <p class="text-muted small">Can only view own tasks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

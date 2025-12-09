@@ -1,0 +1,89 @@
+@SecureTaskHub.Api_HostAddress = https://localhost:7261
+@AuthToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMTgwOWVlMy1hODM4LTQyZTEtOTliNS1hZDA3YjhkZWIzMWIiLCJlbWFpbCI6ImJvYkBkZW1vLmxvY2FsIiwianRpIjoiZDljZGMzMzctN2ZkNy00YjhkLWEwN2EtMDczZmQ2YjQ3Zjk2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIyMTgwOWVlMy1hODM4LTQyZTEtOTliNS1hZDA3YjhkZWIzMWIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJib2JAZGVtby5sb2NhbCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlVzZXIiLCJEZXBhcnRtZW50IjoiSVQiLCJuYmYiOjE3NjUyMjAwNTYsImV4cCI6MTc2NTMwNjQ1NiwiaXNzIjoiU2VjdXJlVGFza0h1YiIsImF1ZCI6IlNlY3VyZVRhc2tIdWIifQ.GOLMiJK-idrc-W45tX4FaE-xmLikgWK1bxZYkT5QIgs
+### User login (sets @AuthToken)
+# @name login
+POST {{SecureTaskHub.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "alice@demo.local",
+  "password": "P@ssword1"
+}
+
+### Admin login (optional: sets @AdminToken)
+# @name adminLogin
+POST {{SecureTaskHub.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "admin@demo.local",
+  "password": "P@ssword1"
+}
+
+###
+
+### Get current user's tasks
+GET {{SecureTaskHub.Api_HostAddress}}/api/tasks
+Accept: application/json
+Authorization: Bearer {{AuthToken}}
+
+###
+
+
+### INSECURE: Get all tasks (any authenticated user)
+GET {{SecureTaskHub.Api_HostAddress}}/api/tasks/all
+Accept: application/json
+# Authorization: Bearer {{AuthToken}}
+
+###
+
+### Admin-only: Get all tasks
+GET {{SecureTaskHub.Api_HostAddress}}/api/tasks/admin/all
+Accept: application/json
+Authorization: Bearer {{AuthToken}}
+
+###
+
+### Get a specific task by id
+GET {{SecureTaskHub.Api_HostAddress}}/api/tasks/7
+Accept: application/json
+Authorization: Bearer {{AuthToken}}
+
+###
+
+### Create a new task
+POST {{SecureTaskHub.Api_HostAddress}}/api/tasks
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{AuthToken}}
+
+{
+  "title": "Review security policy",
+  "description": "Ensure tasks follow proper horizontal access control.",
+  "status": "New"
+}
+
+###
+
+### Update an existing task
+PUT {{SecureTaskHub.Api_HostAddress}}/api/tasks/1
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer {{AuthToken}}
+
+{
+  "title": "Review security policy - updated",
+  "description": "Add notes about IDOR prevention.",
+  "status": "InProgress"
+}
+
+###
+
+### Delete a task
+DELETE {{SecureTaskHub.Api_HostAddress}}/api/tasks/1
+Accept: application/json
+Authorization: Bearer {{AuthToken}}
+
+###

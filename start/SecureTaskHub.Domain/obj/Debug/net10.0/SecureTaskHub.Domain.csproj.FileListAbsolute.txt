@@ -1,0 +1,11 @@
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\bin\Debug\net10.0\SecureTaskHub.Domain.deps.json
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\bin\Debug\net10.0\SecureTaskHub.Domain.dll
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\bin\Debug\net10.0\SecureTaskHub.Domain.pdb
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\SecureTaskHub.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\SecureTaskHub.Domain.AssemblyInfoInputs.cache
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\SecureTaskHub.Domain.AssemblyInfo.cs
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\SecureTaskHub.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\SecureTaskHub.Domain.dll
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\refint\SecureTaskHub.Domain.dll
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\SecureTaskHub.Domain.pdb
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Domain\obj\Debug\net10.0\ref\SecureTaskHub.Domain.dll

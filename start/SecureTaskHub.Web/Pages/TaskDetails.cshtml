@@ -1,0 +1,103 @@
+@page "{id:int}"
+@model SecureTaskHub.Web.Pages.TaskDetailsModel
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Task Details</h1>
+    
+    @if (Model.Task == null)
+    {
+        <div class="alert alert-danger">
+            <strong>Task not found.</strong> The task with ID @Model.TaskId does not exist.
+        </div>
+        <a asp-page="/MyTasks" class="btn btn-primary">Back to My Tasks</a>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">@Model.Task.Title</h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <strong>Task ID:</strong>
+                    </div>
+                    <div class="col-md-9">
+                        @Model.Task.Id
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <strong>Title:</strong>
+                    </div>
+                    <div class="col-md-9">
+                        @Model.Task.Title
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <strong>Description:</strong>
+                    </div>
+                    <div class="col-md-9">
+                        @(Model.Task.Description ?? "(no description)")
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <strong>Status:</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <span class="badge bg-@(Model.Task.Status.ToString() switch
+                        {
+                            "New" => "primary",
+                            "InProgress" => "warning",
+                            "Done" => "success",
+                            _ => "secondary"
+                        })">
+                            @Model.Task.Status
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <strong>Created At:</strong>
+                    </div>
+                    <div class="col-md-9">
+                        @Model.Task.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <strong>Owner User ID:</strong>
+                    </div>
+                    <div class="col-md-9">
+                        <code>@Model.Task.OwnerUserId</code>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-page="/MyTasks" class="btn btn-secondary">Back to My Tasks</a>
+            </div>
+        </div>
+        
+        @if (Model.IsVulnerabilityExposed)
+        {
+            <div class="alert alert-warning mt-4">
+                <h5><i class="bi bi-exclamation-triangle"></i> Security Vulnerability Detected</h5>
+                <p class="mb-0">
+                    <strong>Broken Access Control (OWASP A01:2021)</strong><br/>
+                    You are viewing a task that doesn't belong to you! This is an <strong>Insecure Direct Object Reference (IDOR)</strong> vulnerability.
+                    The application does not verify that the current user owns this task before displaying it.
+                </p>
+            </div>
+        }
+    }
+</div>

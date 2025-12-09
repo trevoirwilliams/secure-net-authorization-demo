@@ -1,0 +1,147 @@
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
+using SecureTaskHub.Domain.Interfaces;
+using SecureTaskHub.Infrastructure.Data;
+using SecureTaskHub.Infrastructure.Repositories;
+using System.Text;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// =============================================================================
+// AUTHENTICATION vs AUTHORIZATION
+// =============================================================================
+// Authorization: Verifying WHAT the user can do (roles, policies, permissions)
+//
+// In this demo:
+// - Authorization is handled by [Authorize] attributes, roles, and policies
+// =============================================================================
+
+// Add Database Context
+// TODO Secure: Use connection strings from secure configuration (Azure Key Vault, User Secrets)
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? "Data Source=SecureTaskHubDb.sqlite"
+    );
+});
+
+// Add ASP.NET Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+   
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+// =============================================================================
+// AUTHENTICATION CONFIGURATION (WHO is the user?)
+// =============================================================================
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    // TODO Secure: Store JWT secret in Azure Key Vault or User Secrets
+    // TODO Secure: Use a cryptographically strong secret (256+ bits)
+    var secretKey = builder.Configuration["Jwt:Secret"] ?? "ThisIsATemporarySecretKeyForDevelopmentOnly123!";
+    
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"] ?? "SecureTaskHub",
+        ValidAudience = builder.Configuration["Jwt:Audience"] ?? "SecureTaskHub",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+        ClockSkew = TimeSpan.FromMinutes(1) // Allow 1 minute tolerance for clock differences
+    };
+    
+    // TODO Secure: Add token validation event handlers for logging and monitoring
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            // Log authentication failures for security monitoring
+            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
+            logger.LogWarning("Authentication failed: {Message}", context.Exception.Message);
+            return Task.CompletedTask;
+        },
+        OnTokenValidated = context =>
+        {
+            // Optional: Add custom validation logic here
+            return Task.CompletedTask;
+        }
+    };
+});
+
+// =============================================================================
+// AUTHORIZATION CONFIGURATION (WHAT can the user do?)
+// =============================================================================
+builder.Services.AddAuthorization(options =>
+{
+    // Example: Custom policy for admin-only access
+    options.AddPolicy("RequireAdminRole", policy => 
+        policy.RequireRole("Admin"));
+});
+
+// Add Repository
+builder.Services.AddScoped<ITaskItemRepository, TaskItemRepository>();
+
+// Add Controllers
+builder.Services.AddControllers();
+
+// Add OpenAPI/Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+// Add CORS
+// TODO Secure: Restrict CORS to specific origins in production
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin() // SECURITY GAP: Should specify allowed origins
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SecureTaskHub API v1"));
+}
+
+app.UseHttpsRedirection();
+
+app.UseCors();
+
+// 1. Authentication: Determines WHO the user is (must come before Authorization)
+app.UseAuthentication();
+
+// 2. Authorization: Determines WHAT the user can do
+app.UseAuthorization();
+
+app.MapControllers();
+
+// Apply migrations and seed data on startup (dev only)
+// TODO Secure: Remove auto-migration in production, use proper deployment process
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
+app.Run();

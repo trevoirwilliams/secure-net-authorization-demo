@@ -1,0 +1,17 @@
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\bin\Debug\net10.0\SecureTaskHub.Infrastructure.deps.json
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\bin\Debug\net10.0\SecureTaskHub.Infrastructure.runtimeconfig.json
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\bin\Debug\net10.0\SecureTaskHub.Infrastructure.dll
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\bin\Debug\net10.0\SecureTaskHub.Infrastructure.pdb
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\bin\Debug\net10.0\SecureTaskHub.Domain.dll
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\bin\Debug\net10.0\SecureTaskHub.Domain.pdb
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.AssemblyInfo.cs
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTa.BEB7B6D4.Up2Date
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.dll
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\refint\SecureTaskHub.Infrastructure.dll
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.pdb
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\SecureTaskHub.Infrastructure.genruntimeconfig.cache
+C:\Users\Trevoir\OneDrive\Courses\Secure Coding in C# and .NET\authorization-demo\start\SecureTaskHub.Infrastructure\obj\Debug\net10.0\ref\SecureTaskHub.Infrastructure.dll
